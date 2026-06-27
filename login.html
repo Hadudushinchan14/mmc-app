@@ -3,12 +3,26 @@
 <head>
   <title>Login</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body style="font-family:Arial;background:#050816;color:white;display:flex;justify-content:center;align-items:center;height:100vh;">
+
+<div>
+  <h2>MMC Login</h2>
+
+  <input id="email" placeholder="Email" style="display:block;margin:10px;padding:10px;width:250px;">
+  <input id="password" type="password" placeholder="Password" style="display:block;margin:10px;padding:10px;width:250px;">
+
+  <button onclick="login()" style="padding:10px 20px;margin:10px;">Login</button>
+
+  <p id="msg"></p>
+</div>
 
 <script>
 const supabaseUrl = "https://mkrnksthkovbolgvggvh.supabase.co";
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1rcm5rc3Roa292Ym9sZ3ZnZ3ZoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI1MzE5MDYsImV4cCI6MjA5ODEwNzkwNn0.oSz-xPYOV0Fwzottm62pnqBgySAH6ozFavZLyUua_Is";
+const supabaseKey = "YOUR_ANON_KEY";
 
-const supabase = supabase_js.createClient(supabaseUrl, supabaseKey);
+const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 async function login() {
   const email = document.getElementById("email").value;
@@ -20,12 +34,13 @@ async function login() {
   });
 
   if (error) {
-    alert(error.message);
+    document.getElementById("msg").innerText = error.message;
     return;
   }
 
   window.location.href = "/dashboard.html";
 }
 </script>
+
 </body>
 </html>
