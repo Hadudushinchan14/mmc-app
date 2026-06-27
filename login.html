@@ -1,37 +1,25 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Login</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-</head>
-<body>
-  <h2>Login</h2>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <input id="email" placeholder="email">
-  <input id="password" type="password" placeholder="password">
+<script>
+const supabaseUrl = "https://mkrnksthkovbolgvggvh.supabase.co";
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1rcm5rc3Roa292Ym9sZ3ZnZ3ZoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI1MzE5MDYsImV4cCI6MjA5ODEwNzkwNn0.oSz-xPYOV0Fwzottm62pnqBgySAH6ozFavZLyUua_Is";
 
-  <button onclick="login()">Login</button>
+const supabase = supabase_js.createClient(supabaseUrl, supabaseKey);
 
-  <script>
-    const supabase = window.supabase.createClient(
-      "https://mkrnksthkovbolgvggvh.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1rcm5rc3Roa292Ym9sZ3ZnZ3ZoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI1MzE5MDYsImV4cCI6MjA5ODEwNzkwNn0.oSz-xPYOV0Fwzottm62pnqBgySAH6ozFavZLyUua_Is"
-    );
+async function login() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
 
-    async function login() {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password
+  });
 
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password
-      });
+  if (error) {
+    alert(error.message);
+    return;
+  }
 
-      if (!error) {
-        window.location.href = "dashboard.html";
-      } else {
-        alert(error.message);
-      }
-    }
-  </script>
-</body>
-</html>
+  window.location.href = "/dashboard.html";
+}
+</script>
