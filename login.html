@@ -34,10 +34,11 @@ async function login() {
   });
 
   if (error) {
-    document.getElementById("msg").innerText = error.message;
+    alert("Login error: " + error.message);
     return;
   }
 
+  alert("Login success!");
   window.location.href = "/dashboard.html";
 }
 </script>
